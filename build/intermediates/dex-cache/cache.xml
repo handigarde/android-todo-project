@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/Users/ryanhandy/Documents/android/ToDoApp/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="/Users/ryanhandy/Documents/android/ToDoApp/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-23.4.0_03c3f33e013c102df7f5883c53f16b444f0da511.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/ryanhandy/Documents/android/ToDoApp/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3180e9475c7741f17c65f4f08c468df6c14e4ae6">
+        <dex dex="/Users/ryanhandy/Documents/android/ToDoApp/app/build/intermediates/pre-dexed/debug/instant-run_40a6b5cd5b5844d4e605240e2b81d4f5aeff7ff2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/ryanhandy/Documents/android/ToDoApp/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c51efc916d86d05afa27ab071b87b70ef7e673b2">
+        <dex dex="/Users/ryanhandy/Documents/android/ToDoApp/app/build/intermediates/pre-dexed/debug/instant-run-bootstrap_d6b7012a6029939ba5b85460587760a019056e6e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/ryanhandy/Documents/android/ToDoApp/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="/Users/ryanhandy/Documents/android/ToDoApp/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.4.0_3dc131a5480cca3f1afb76b23a283beca66d1393.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/ryanhandy/Documents/android/ToDoApp/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/libs/internal_impl-23.4.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="/Users/ryanhandy/Documents/android/ToDoApp/app/build/intermediates/pre-dexed/debug/internal_impl-23.4.0_32ea954ae3da98751491d1db827e548690feb1bb.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/ryanhandy/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.4.0/support-annotations-23.4.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="/Users/ryanhandy/Documents/android/ToDoApp/app/build/intermediates/pre-dexed/debug/support-annotations-23.4.0_1dbd8211da07bf4464e4ab7e25d03f931a71d2a3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Applications/Android Studio.app/Contents/gradle/m2repository/commons-io/commons-io/2.4/commons-io-2.4.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b1b6ea3b7e4aa4f492509a4952029cd8e48019ad">
+        <dex dex="/Users/ryanhandy/Documents/android/ToDoApp/app/build/intermediates/pre-dexed/debug/commons-io-2.4_db9d9c7f5dc9abc44c05f9a56b43532b2a4af315.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/ryanhandy/Documents/android/ToDoApp/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="/Users/ryanhandy/Documents/android/ToDoApp/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-23.4.0_f71864f54b90d65f5b260dc1faad4d6cbfb983d7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/ryanhandy/Documents/android/ToDoApp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="/Users/ryanhandy/Documents/android/ToDoApp/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.4.0_52c5c36219d1d41492a0eaf7e82b6eb7c1a5b0b3.jar" />
+    </item>
+
+</items>

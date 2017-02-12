@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">ToDoApp</string>
+    <string name="add">Add</string>
+    <string name="add_item">Add a new item...</string>
+    <string name="to_do_text">To Do</string>
+    <string name="completed_items_text">Completed Items</string>
+    <string name="select_priority">Priority</string>
+    <string-array name="priorities_array">
+        <item>High</item>
+        <item>Med</item>
+        <item>Low</item>
+    </string-array>
+</resources>
