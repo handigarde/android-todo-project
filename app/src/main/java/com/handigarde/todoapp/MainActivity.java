@@ -1,5 +1,6 @@
 package com.handigarde.todoapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+    private final int REQUEST_CODE = 20;
     private ListView lvItems;
     private EditText etEditText;
     private ArrayList<String> todoItems;
@@ -52,6 +54,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     writeItems();
                     return true;
                 }
+            }
+        });
+        lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(MainActivity.this, EditItemActivity.class);
+                if (rbToDoItems.isChecked()){
+                    i.putExtra("ItemName", todoItems.get(position));
+                }
+                else {
+                    i.putExtra("ItemName", completedItems.get(position));
+                }
+                i.putExtra("position", position);
+                i.putExtra("isPending", rbToDoItems.isChecked());
+                startActivityForResult(i, REQUEST_CODE);
             }
         });
     }
@@ -111,6 +128,23 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
                 break;
 
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+            String itemName = data.getExtras().getString("ItemName");
+            boolean isPending = data.getExtras().getBoolean("isPending");
+            int position = data.getExtras().getInt("position");
+            if (isPending) {
+                todoItems.set(position, itemName);
+                aToDoAdapter.notifyDataSetChanged();
+            }
+            else {
+                completedItems.set(position, itemName);
+                aCompletedAdapter.notifyDataSetChanged();
+            }
         }
     }
 

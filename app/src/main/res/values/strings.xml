@@ -5,6 +5,9 @@
     <string name="to_do_text">To Do</string>
     <string name="completed_items_text">Completed Items</string>
     <string name="select_priority">Priority</string>
+    <string name="edit_item_text">Edit Item Below:</string>
+    <string name="edit_item">Edit item...</string>
+    <string name="save">Save</string>
     <string-array name="priorities_array">
         <item>High</item>
         <item>Med</item>
