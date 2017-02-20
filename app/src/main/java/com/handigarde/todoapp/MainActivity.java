@@ -9,23 +9,29 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 
 import org.apache.commons.io.FileUtils;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private final int REQUEST_CODE = 20;
     private ListView lvItems;
     private EditText etEditText;
-    private ArrayList<String> todoItems;
-    private ArrayList<String> completedItems;
-    private ArrayAdapter<String> aToDoAdapter;
-    private ArrayAdapter<String> aCompletedAdapter;
+    private ArrayList<Task> todoItems;
+    private ArrayList<Task> completedItems;
+    private CustomListAdapter aToDoAdapter;
+    private CustomListAdapter aCompletedAdapter;
     private RadioButton rbToDoItems;
+    private Spinner spPrioritySpinner;
 
 
     @Override
@@ -37,11 +43,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         lvItems.setAdapter(aToDoAdapter);
         etEditText = (EditText) findViewById(R.id.etEditText);
         rbToDoItems = (RadioButton) findViewById(R.id.rbToDoItems);
+        spPrioritySpinner = (Spinner) findViewById(R.id.spPrioritySpinner);
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this,
+                R.array.priorities_array, android.R.layout.simple_spinner_item);
+        spPrioritySpinner.setAdapter(spinnerAdapter);
         lvItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 if (rbToDoItems.isChecked()) {
-                    String completedItem = todoItems.remove(position);
+                    Task completedItem = todoItems.remove(position);
                     completedItems.add(completedItem);
                     aToDoAdapter.notifyDataSetChanged();
                     aCompletedAdapter.notifyDataSetChanged();
@@ -61,10 +71,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(MainActivity.this, EditItemActivity.class);
                 if (rbToDoItems.isChecked()){
-                    i.putExtra("ItemName", todoItems.get(position));
+                    i.putExtra("ItemName", todoItems.get(position).getTask());
+                    i.putExtra("ItemPriority", todoItems.get(position).getPriority());
                 }
                 else {
-                    i.putExtra("ItemName", completedItems.get(position));
+                    i.putExtra("ItemName", completedItems.get(position).getTask());
+                    i.putExtra("ItemPriority", completedItems.get(position).getPriority());
                 }
                 i.putExtra("position", position);
                 i.putExtra("isPending", rbToDoItems.isChecked());
@@ -75,17 +87,40 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public void populateArrayItems() {
         readItems();
-        aToDoAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, todoItems);
-        aCompletedAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, completedItems);
+        //aToDoAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, todoItems);
+        //aCompletedAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, completedItems);
+        aToDoAdapter = new CustomListAdapter(this, todoItems);
+        aCompletedAdapter = new CustomListAdapter(this, completedItems);
     }
 
     private void readItems() {
         File filesDir = getFilesDir();
         File todoFile = new File(filesDir, "todo.txt");
         File completedFile = new File(filesDir, "completed.txt");
+
         try {
-            todoItems = new ArrayList<String>(FileUtils.readLines(todoFile));
-            completedItems = new ArrayList<String>(FileUtils.readLines(completedFile));
+            //todoItems = new ArrayList<String>(FileUtils.readLines(todoFile));
+            //completedItems = new ArrayList<String>(FileUtils.readLines(completedFile));
+            todoItems = new ArrayList<Task>();
+            completedItems = new ArrayList<Task>();
+            FileReader todoReader = new FileReader(todoFile);
+            FileReader completedReader = new FileReader(completedFile);
+            BufferedReader todoBufferedReader = new BufferedReader(todoReader);
+            BufferedReader completedBufferedReader = new BufferedReader(completedReader);
+            String line;
+            while ((line = todoBufferedReader.readLine()) != null) {
+                if (line.indexOf(',') != -1){
+                    List<String> splitLine = Arrays.asList(line.split(","));
+                    todoItems.add(new Task(splitLine.get(0), splitLine.get(1)));
+                }
+            }
+            while ((line = completedBufferedReader.readLine()) != null) {
+                if (line.indexOf(',') != -1){
+                    List<String> splitLine = Arrays.asList(line.split(","));
+                    completedItems.add(new Task(splitLine.get(0), splitLine.get(1)));
+                }
+            }
+
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -96,8 +131,24 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         File todoFile = new File(filesDir, "todo.txt");
         File completedFile = new File(filesDir, "completed.txt");
         try {
-            FileUtils.writeLines(todoFile, todoItems);
-            FileUtils.writeLines(completedFile, completedItems);
+            // FileUtils.writeLines(todoFile, todoItems);
+            // FileUtils.writeLines(completedFile, completedItems);
+            if (todoItems.size() < 1) {
+                FileUtils.write(todoFile, "");
+            }
+            else {
+                for (Task item : todoItems) {
+                    FileUtils.write(todoFile, item.getTask() + "," + item.getPriority());
+                }
+            }
+            if (completedItems.size() < 1) {
+                FileUtils.write(completedFile, "");
+            }
+            else {
+                for (Task item : completedItems) {
+                    FileUtils.write(completedFile, item.getTask() + "," + item.getPriority());
+                }
+            }
         } catch (IOException e) {
 
         }
@@ -106,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
     public void onAddItem(View view) {
-        aToDoAdapter.add(etEditText.getText().toString());
+        aToDoAdapter.add(new Task(etEditText.getText().toString(), (String) spPrioritySpinner.getSelectedItem()));
         etEditText.setText("");
         writeItems();
     }
@@ -135,14 +186,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
             String itemName = data.getExtras().getString("ItemName");
+            String itemPriority = data.getExtras().getString("ItemPriority");
             boolean isPending = data.getExtras().getBoolean("isPending");
             int position = data.getExtras().getInt("position");
             if (isPending) {
-                todoItems.set(position, itemName);
+                todoItems.set(position, new Task(itemName, itemPriority));
                 aToDoAdapter.notifyDataSetChanged();
             }
             else {
-                completedItems.set(position, itemName);
+                completedItems.set(position, new Task(itemName, itemPriority));
                 aCompletedAdapter.notifyDataSetChanged();
             }
         }

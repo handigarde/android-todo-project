@@ -8,9 +8,10 @@
     <string name="edit_item_text">Edit Item Below:</string>
     <string name="edit_item">Edit item...</string>
     <string name="save">Save</string>
+    <string name="select_priority_text">Select Priority: </string>
     <string-array name="priorities_array">
         <item>High</item>
-        <item>Med</item>
+        <item>Medium</item>
         <item>Low</item>
     </string-array>
 </resources>

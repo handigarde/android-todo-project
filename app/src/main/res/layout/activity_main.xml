@@ -26,8 +26,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:id="@+id/etEditText"
-        android:hint="@string/add_item"
-        android:layout_toStartOf="@+id/btnAddItem" />
+        android:hint="@string/add_item" />
 
     <RadioGroup
         android:layout_width="wrap_content"
@@ -64,6 +63,15 @@
         android:id="@+id/lvItems"
         android:layout_below="@+id/rgRadioGroup"
         android:layout_above="@+id/etEditText" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spPrioritySpinner"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/etEditText"
+        android:layout_toStartOf="@id/btnAddItem"
+        android:layout_below="@+id/lvItems" />
 
 
 </RelativeLayout>
