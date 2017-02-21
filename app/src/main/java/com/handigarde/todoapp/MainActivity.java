@@ -2,6 +2,7 @@ package com.handigarde.todoapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements EditItemDialogFragment.EditItemDialogListener {
 
     private final int REQUEST_CODE = 20;
     private ListView lvItems;
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(MainActivity.this, EditItemActivity.class);
+                /*Intent i = new Intent(MainActivity.this, EditItemActivity.class);
                 if (rbToDoItems.isChecked()){
                     i.putExtra("ItemName", todoItems.get(position).getTask());
                     i.putExtra("ItemPriority", todoItems.get(position).getPriority());
@@ -80,10 +81,30 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
                 i.putExtra("position", position);
                 i.putExtra("isPending", rbToDoItems.isChecked());
-                startActivityForResult(i, REQUEST_CODE);
+                startActivityForResult(i, REQUEST_CODE);*/
+                showEditDialog(position);
             }
         });
     }
+
+    private void showEditDialog(int position) {
+        FragmentManager fm = getSupportFragmentManager();
+        String title;
+        String priority;
+        boolean isPending = rbToDoItems.isChecked();
+        if (isPending) {
+            title = todoItems.get(position).getTask();
+            priority = todoItems.get(position).getPriority();
+        }
+        else {
+            title = completedItems.get(position).getTask();
+            priority = completedItems.get(position).getPriority();
+        }
+        EditItemDialogFragment editItemDialogFragment = EditItemDialogFragment.newInstance(title,
+                priority, isPending, position);
+        editItemDialogFragment.show(fm, "fragment_edit_item");
+    }
+
 
     public void populateArrayItems() {
         readItems();
@@ -157,9 +178,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
     public void onAddItem(View view) {
-        aToDoAdapter.add(new Task(etEditText.getText().toString(), (String) spPrioritySpinner.getSelectedItem()));
-        etEditText.setText("");
-        writeItems();
+        String text = etEditText.getText().toString();
+        if (!text.equals("")) {
+            aToDoAdapter.add(new Task(text, (String) spPrioritySpinner.getSelectedItem()));
+            etEditText.setText("");
+            writeItems();
+        }
     }
 
     public void onRadioButtonClicked(View view) {
@@ -201,13 +225,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View v, int position,
-                               long id) {
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> arg0) {
-
+    public void onFinishEditDialog(String taskName, String taskPriority, boolean isPending, int position) {
+        if (isPending) {
+            todoItems.set(position, new Task(taskName, taskPriority));
+            aToDoAdapter.notifyDataSetChanged();
+        }
+        else {
+            completedItems.set(position, new Task(taskName, taskPriority));
+            aCompletedAdapter.notifyDataSetChanged();
+        }
     }
 }
