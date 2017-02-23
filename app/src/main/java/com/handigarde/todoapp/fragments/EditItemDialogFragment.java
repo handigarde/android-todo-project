@@ -1,4 +1,4 @@
-package com.handigarde.todoapp;
+package com.handigarde.todoapp.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import com.handigarde.todoapp.R;
 
 /**
  * Created by ryanhandy on 2/20/17.
