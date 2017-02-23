@@ -124,7 +124,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="a293fbf20a543838dd9c1f61419a4fac479d2456">
+        sha1="eb78e6f01612db97d6e4567d37ec435ce83570fe">
         <dex dex="/Users/ryanhandy/Documents/android/android-todo-project/app/build/intermediates/pre-dexed/debug/instant-run-bootstrap_9d38960a3708c7bfd558fda629c7ff44e1d7332d.jar" />
     </item>
     <item

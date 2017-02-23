@@ -1,4 +1,4 @@
-package com.handigarde.todoapp;
+package com.handigarde.todoapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,11 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+
+import com.handigarde.todoapp.fragments.EditItemDialogFragment;
+import com.handigarde.todoapp.R;
+import com.handigarde.todoapp.models.Task;
+import com.handigarde.todoapp.adapters.CustomListAdapter;
 
 import org.apache.commons.io.FileUtils;
 

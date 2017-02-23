@@ -1,4 +1,4 @@
-package com.handigarde.todoapp;
+package com.handigarde.todoapp.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.handigarde.todoapp.R;
+import com.handigarde.todoapp.models.Task;
 
 import java.util.ArrayList;
 

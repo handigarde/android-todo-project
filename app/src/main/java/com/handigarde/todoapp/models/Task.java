@@ -1,4 +1,4 @@
-package com.handigarde.todoapp;
+package com.handigarde.todoapp.models;
 
 /**
  * Created by ryanhandy on 2/19/17.
